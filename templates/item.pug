@@ -1,0 +1,25 @@
+extends template
+
+block head
+  script(src="/js/comment.js")
+  script(src="/js/deletecomment.js")
+
+block content
+  .newcontainer
+    .newleft
+      h1.nametitle #{item.name}
+      h3.substatus #{status}
+      p.
+      | #{item.description}
+
+      form.createcommentform(action="/api/createitem" method="POST")
+        textarea#comment(placeholder="add comment" required)
+        input#id(type="hidden" value=item.id)
+        button#add_button(type="submit") Submit
+    .newright
+      .commentcontainer
+        each comment in comments
+          .commentbox
+            p.message
+            | #{comment.comment}
+            button.delete_comment_btn(imbedded_id=comment.id) X

@@ -1,0 +1,28 @@
+extends template
+
+block head
+  script(src="/js/addlistitem.js")
+  script(src="/js/deletelistitem.js")
+  script(src="/js/setstatus.js")
+
+block content
+  h1.todotitle TODO LIST
+  .container
+    .leftcontent
+      form(action="/api/createitem" method="POST")
+        input#name(type="text" placeholder="Item Name" required)
+        textarea#description(placeholder="Item Description" required)
+        button#add_button(type="submit") Submit
+    .rightcontent
+      .userguide
+        h2 Your Todo Items:
+      .todo_item_container
+        each item in items
+          .listitem(imbedded-id=item.id, imbedded-status=item.done)
+            a.listname(href=`/item/${item.id}`) #{item.name}
+            //- p.listdesc
+            //-   | #{item.description}
+            .updatestat-delete
+              button.todo-delete-btn(imbedded-id=item.id) Delete
+              button.todo-status-btn(imbedded-id=item.id, imbedded-status=item.done) Done/NotDone
+

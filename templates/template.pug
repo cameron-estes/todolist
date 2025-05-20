@@ -1,0 +1,19 @@
+doctype html
+html(lang="en")
+  head
+    title #{title}
+    meta(chartset="UTF-8")
+    link(rel="stylesheet", href="/css/main.css")
+    block head
+  body
+    nav
+      .navbar
+        a(href='http://localhost:4131/') Return To Todo List
+      form.search(action='/' method='GET')
+        select(name='status')
+          option(value='all') All Items
+          option(value='done') Completed Items
+          option(value='notdone') Uncomplete Items
+        input(type='submit' value='Search')
+
+    block content
